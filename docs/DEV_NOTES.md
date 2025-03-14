@@ -40,3 +40,7 @@
   - static type checking
 - typing
   - type hints
+
+## TO-DO:
+
+- [ ] get pylint working on project
