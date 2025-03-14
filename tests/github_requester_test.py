@@ -3,7 +3,7 @@ import typing
 import os
 import dotenv
 #from github_activity import github_requester # TODO: This import isn't workign
-import github_activity # https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html#choosing-a-test-layout-import-rules
+from src import github_activity # https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html#choosing-a-test-layout-import-rules
 
 
 class GithubRequesterTests:
