@@ -3,7 +3,9 @@
 ## Features Checklist Macro-View
 
 - [ ] Access Github Events API
-  - [ ] Save token to access private events log?
+  - [ ] authentication to access private events log?
+  - [ ] way for user to store api token locally?
+  - [ ] GithubRequesterConfig class that loads on program init
 - [ ] CLI
   - [ ] options to filter activity?
 - [ ] Settings
