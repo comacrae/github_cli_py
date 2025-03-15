@@ -7,15 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-python-dotenv = "^1.0.1"
-pydantic = "^2.10.6"
-pytest = "^8.3.5"
-rich = "^13.9.4"
 mypy = "^1.15.0"
+pydantic = "^2.10.6"
+dotenv = "^0.9.9"
+rich = "^13.9.4"
 requests = "^2.32.3"
+argparse = "^1.4.0"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
