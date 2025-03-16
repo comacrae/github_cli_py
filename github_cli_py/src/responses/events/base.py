@@ -1,13 +1,13 @@
-from typing import Any, Mapping
-import dataclasses
+import pydantic
 import abc
 
+from typing import Any, Mapping
 
-class GithubEventPayload(metaclass=abc.ABCMeta):
+
+class GithubEventPayload(pydantic.BaseModel, abc.ABC):
   pass
 
-@dataclasses.dataclass
-class GithubEventActor():
+class GithubEventActor(pydantic.BaseModel):
   id: int
   login: str
   display_login: str
@@ -15,22 +15,19 @@ class GithubEventActor():
   url: str
   avatar_url: str
 
-@dataclasses.dataclass
-class GithubEventRepo():
+class GithubEventRepo(pydantic.BaseModel):
   id : int
   name: str
   url: str
 
-@dataclasses.dataclass
-class GithubEventOrg():
+class GithubEventOrg(pydantic.BaseModel):
   id: int
   login:str
   gravatar_id: str
   url:str
   avatar_url:str
 
-@dataclasses.dataclass 
-class GithubEvent(metaclass=abc.ABCMeta):
+class GithubEvent(pydantic.BaseModel,abc.ABC):
   id: int
   type:str
   actor: GithubEventActor
@@ -46,7 +43,6 @@ class GithubEvent(metaclass=abc.ABCMeta):
   @abc.abstractmethod
   def parse_payload(payload:dict[str,Any]) -> GithubEventPayload:
     pass
-  
 
 
 
