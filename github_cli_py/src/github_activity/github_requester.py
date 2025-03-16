@@ -1,4 +1,4 @@
-from typing import Final
+from typing import Final, Any
 import dotenv
 import requests
 import os
@@ -18,6 +18,7 @@ class GithubRequester:
   def __init__(self) -> None:
     self._GITHUB_API_KEY : Final[str] = self._get_api_key()
     self._session : requests.Session = self._build_session()
+    self._BASE_URL : Final[str] = "https://api.github.com/"
     return
   
   def _build_session(self) -> requests.Session:
@@ -49,6 +50,31 @@ class GithubRequester:
       raise RuntimeError("API key is None in _get_api_key")
     else:
       return api_key
+  
+  def _valid_session(self) -> bool:
+    """ Returns a flag indicating whether the session is able to connect to 
+    Github REST API
+    """ 
+    response: requests.Response = self._session.get(self._BASE_URL)
+    return response.status_code == 200
+  
+  def _get_public_user_events_paginated(self,username: str, page: int = 1, 
+                                        per_page: int = 30) -> Any:
+    """  Gets user response.Assumes the username has already been validated"""
+
+    raise NotImplementedError #TODO: create GithubResponse obj and parse
+    url : str = f"{self._BASE_URL}users/{username}/events/public"
+    payload: dict[str,int] = {"page": page, "per_page": per_page}
+    res : requests.Response = self._session.get(url=url, params=payload)
+
+  
+  def user_exists(self,username:str) -> bool:
+    """ Checks to confirm whether a username in Github eists"""
+    url:str = f"{self._BASE_URL}users/{username}"    
+    res: requests.Response = self._session.get(url=url)
+    return res.status_code == 200
+
+
 
     
 

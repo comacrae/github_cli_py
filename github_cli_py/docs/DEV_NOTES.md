@@ -44,3 +44,12 @@
 ## TO-DO:
 
 - [ ] get pylint working on project
+
+## Class Sketches
+
+### GithubRequester
+
+- set_user
+  - file option
+  - str param
+  - load on init
