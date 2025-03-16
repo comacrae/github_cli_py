@@ -19,3 +19,5 @@ def push_event_json() -> Mapping:
 def test_push_event_init_success(push_event_json) -> None:
   event: push_event.GithubPushEvent = push_event.GithubPushEvent.model_validate(push_event_json)
   assert type(event) == push_event.GithubPushEvent
+  assert type(event.id) == int
+  assert event.id == int(push_event_json["id"])

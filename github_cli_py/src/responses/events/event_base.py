@@ -33,11 +33,7 @@ class GithubEvent(pydantic.BaseModel,abc.ABC):
   repo: GithubEventRepo
   public: bool
   created_at: str
-
-  @property
-  @abc.abstractmethod
-  def payload() -> GithubEventPayload:
-    pass
+  payload:GithubEventPayload
 
 
 

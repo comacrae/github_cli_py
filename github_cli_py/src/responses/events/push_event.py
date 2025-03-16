@@ -3,7 +3,7 @@ import pydantic
 
 from github_cli_py.src.responses.events import event_base
 
-class PushEventPayload(pydantic.BaseModel):
+class PushEventPayload(event_base.GithubEventPayload):
   push_id: int
   size: int
   distinct_size: int 
