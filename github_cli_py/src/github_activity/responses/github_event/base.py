@@ -3,11 +3,11 @@ import dataclasses
 import abc
 
 
-class GithubPayload(metaclass=abc.ABCMeta):
+class GithubEventPayload(metaclass=abc.ABCMeta):
   pass
 
 @dataclasses.dataclass
-class Actor():
+class GithubEventActor():
   id: int
   login: str
   display_login: str
@@ -16,13 +16,13 @@ class Actor():
   avatar_url: str
 
 @dataclasses.dataclass
-class Repo():
+class GithubEventRepo():
   id : int
   name: str
   url: str
 
 @dataclasses.dataclass
-class Org():
+class GithubEventOrg():
   id: int
   login:str
   gravatar_id: str
@@ -33,18 +33,18 @@ class Org():
 class GithubEvent(metaclass=abc.ABCMeta):
   id: int
   type:str
-  actor: Actor 
-  repo: Repo
+  actor: GithubEventActor
+  repo: GithubEventRepo
   public: bool
   created_at: str
 
   @property
   @abc.abstractmethod
-  def payload() -> GithubPayload:
+  def payload() -> GithubEventPayload:
     pass
 
   @abc.abstractmethod
-  def parse_payload(payload:dict[str,Any]) -> GithubPayload:
+  def parse_payload(payload:dict[str,Any]) -> GithubEventPayload:
     pass
   
 
