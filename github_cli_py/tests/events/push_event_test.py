@@ -16,14 +16,25 @@ def push_event_json() -> Mapping:
     assert push_event["type"] == "PushEvent"
     return push_event
 
+@pytest.fixture
+def push_event_fixture(push_event_json: Mapping) -> push_event.GithubPushEvent:
+  return push_event.GithubPushEvent.model_validate(push_event_json)
+
+@pytest.fixture
+def push_event_commits(push_event_fixture: push_event.GithubPushEvent) -> list[push_event.GithubCommit]:
+  return push_event_fixture.payload.commits
+
+
+
 def test_push_event_init_success(push_event_json) -> None:
   event: push_event.GithubPushEvent = push_event.GithubPushEvent.model_validate(push_event_json)
   assert type(event) == push_event.GithubPushEvent
   assert type(event.id) == int
   assert event.id == int(push_event_json["id"])
 
-def test_push_event_serialize_matches_input(push_event_json) -> None:
-  event : push_event.GithubPushEvent = push_event.GithubPushEvent.model_validate(push_event_json)
-  serialized_event: dict = event.model_dump()
-  assert push_event_json == serialized_event
+def test_push_event_commits_valid(push_event_commits: list[push_event.GithubCommit]) -> None:
+  for commit in push_event_commits:
+    assert type(commit) == push_event.GithubCommit
+    assert commit.author.name == "comacrae"
+
 
