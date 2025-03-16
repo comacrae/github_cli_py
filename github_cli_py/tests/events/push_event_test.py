@@ -2,7 +2,7 @@ import pytest
 import json
 from typing import Mapping
 from github_cli_py.src.requester import github_requester
-from github_cli_py.src.responses.events import github_event
+from github_cli_py.src.responses.events import push_event
 
 @pytest.fixture
 def requester() -> github_requester.GithubRequester:
@@ -17,4 +17,4 @@ def push_event_json() -> Mapping:
     return push_event
 
 def test_push_event_init_success() -> None:
-  raise NotImplementedErro
+  raise NotImplementedError

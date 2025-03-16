@@ -1,7 +1,6 @@
 import pydantic
 import abc
-
-from typing import Any, Mapping
+from typing import Any
 
 
 class GithubEventPayload(pydantic.BaseModel, abc.ABC):
@@ -39,12 +38,6 @@ class GithubEvent(pydantic.BaseModel,abc.ABC):
   @abc.abstractmethod
   def payload() -> GithubEventPayload:
     pass
-
-  @abc.abstractmethod
-  def parse_payload(payload:dict[str,Any]) -> GithubEventPayload:
-    pass
-
-
 
 
 

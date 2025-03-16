@@ -2,7 +2,6 @@ import pytest
 import os
 import dotenv
 from github_cli_py.src.requester import github_requester 
-# https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html#choosing-a-test-layout-import-rules
 
 @pytest.fixture
 def requester() -> github_requester.GithubRequester :
