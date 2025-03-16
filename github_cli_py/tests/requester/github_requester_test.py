@@ -1,8 +1,7 @@
 import pytest
-import typing
 import os
 import dotenv
-from src.github_activity import github_requester 
+from github_cli_py.src.requester import github_requester 
 # https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html#choosing-a-test-layout-import-rules
 
 @pytest.fixture
