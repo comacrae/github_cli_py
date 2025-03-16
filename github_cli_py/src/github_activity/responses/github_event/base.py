@@ -2,6 +2,10 @@ from typing import Any, Mapping
 import dataclasses
 import abc
 
+
+class GithubPayload(metaclass=abc.ABCMeta):
+  pass
+
 @dataclasses.dataclass
 class Actor():
   id: int
@@ -31,12 +35,16 @@ class GithubEvent(metaclass=abc.ABCMeta):
   type:str
   actor: Actor 
   repo: Repo
-  payload: Any # NOTE: This may change in the future
   public: bool
   created_at: str
 
+  @property
   @abc.abstractmethod
-  def parse_payload(payload:dict[str,Any]) -> Mapping:
+  def payload() -> GithubPayload:
+    pass
+
+  @abc.abstractmethod
+  def parse_payload(payload:dict[str,Any]) -> GithubPayload:
     pass
   
 
