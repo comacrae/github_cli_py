@@ -1,0 +1,24 @@
+{
+  "id": "47659641064",
+  "type": "DeleteEvent",
+  "actor": {
+    "id": 41898282,
+    "login": "github-actions[bot]",
+    "display_login": "github-actions",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/github-actions[bot]",
+    "avatar_url": "https://avatars.githubusercontent.com/u/41898282?"
+  },
+  "repo": {
+    "id": 937100822,
+    "name": "17kccc/OpenWRT-CI",
+    "url": "https://api.github.com/repos/17kccc/OpenWRT-CI"
+  },
+  "payload": {
+    "ref": "IPQ60XX-WIFI-NO_immortalwrt.git-main_25.03.17_06.21.57",
+    "ref_type": "tag",
+    "pusher_type": "user"
+  },
+  "public": true,
+  "created_at": "2025-03-17T22:20:00Z"
+}

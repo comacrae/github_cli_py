@@ -11,4 +11,3 @@ def load_json_resource(
   full_path : str = path.join(dirpath,filename)
   with open(full_path, "r") as f:
     return json.load(f)
-
