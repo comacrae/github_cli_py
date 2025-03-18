@@ -7,7 +7,7 @@ from github_cli_py.src.responses.events import issue_comment_event
 def issue_comment_event_json() -> Mapping:
   return utils.load_json_resource(filename="issue_comment_event_response.json")
 
-@pytest.mark.xfail
+#@pytest.mark.xfail
 def test_issue_comment_event_init_success(issue_comment_event_json):
   event: issue_comment_event.GithubIssueCommentEvent = (
     issue_comment_event.GithubIssueCommentEvent

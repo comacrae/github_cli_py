@@ -9,8 +9,8 @@ class WikiPage(pydantic.BaseModel):
   html_url: str
 
 
-class GollumPayload(event_base.GithubEventPayload):
+class GollumEventPayload(event_base.GithubEventPayload):
   pages: list[WikiPage]
 
 class GithubGollumEvent(event_base.GithubEvent):
-  payload: GollumPayload
+  payload: GollumEventPayload

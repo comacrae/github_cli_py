@@ -9,5 +9,5 @@ def load_json_resource(
   if filename is None:
     raise TypeError("Filename parameter must be defined")
   full_path : str = path.join(dirpath,filename)
-  with open(full_path, "r") as f:
+  with open(full_path, "r",errors="ignore") as f:
     return json.load(f)
