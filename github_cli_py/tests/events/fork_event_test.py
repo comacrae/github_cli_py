@@ -1,6 +1,6 @@
 import pytest
 from typing import Mapping
-from github_cli_py.src.responses.events import fork_event
+from github_cli_py.src.responses.events.event_types import fork_event
 from github_cli_py.tests import utils
 
 

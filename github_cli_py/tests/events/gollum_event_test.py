@@ -1,6 +1,6 @@
 import pytest
 from github_cli_py.tests import utils
-from github_cli_py.src.responses.events import gollum_event
+from github_cli_py.src.responses.events.event_types import gollum_event
 
 @pytest.fixture
 def gollum_response_json():

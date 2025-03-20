@@ -1,8 +1,8 @@
-from typing import Final, Any
 import dotenv
 import requests
 import os
-
+from typing import Final
+from github_cli_py.src.responses.events import event_base
 
 class GithubRequester:
   """ Class for handling all interaction with the Github REST API. 
@@ -58,14 +58,16 @@ class GithubRequester:
     response: requests.Response = self._session.get(self._BASE_URL)
     return response.status_code == 200
   
-  def _get_public_user_events_paginated(self,username: str, page: int = 1, 
-                                        per_page: int = 30) -> Any:
+  def _get_public_user_events_paginated(self,username: str, 
+                                        page: int = 1, 
+                                        per_page: int = 30
+                                        ) -> list[event_base.GithubEvent]:
     """  Gets user response.Assumes the username has already been validated"""
 
-    raise NotImplementedError #TODO: create GithubResponse obj and parse
     url : str = f"{self._BASE_URL}users/{username}/events/public"
     payload: dict[str,int] = {"page": page, "per_page": per_page}
     res : requests.Response = self._session.get(url=url, params=payload)
+    res.
 
   
   def user_exists(self,username:str) -> bool:
@@ -73,6 +75,7 @@ class GithubRequester:
     url:str = f"{self._BASE_URL}users/{username}"    
     res: requests.Response = self._session.get(url=url)
     return res.status_code == 200
+  
 
 
 

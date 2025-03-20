@@ -1,7 +1,7 @@
 import pytest
 from typing import Mapping, Type
 from github_cli_py.tests import utils
-from github_cli_py.src.responses.events import event_base
+from github_cli_py.src.responses.events.event_types import event_base
 
 
 def model_validate_and_assert_type(event_type: Type[event_base.GithubEvent],

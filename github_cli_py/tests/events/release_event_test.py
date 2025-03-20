@@ -1,5 +1,5 @@
 import pytest
-from github_cli_py.src.responses.events import release_event
+from github_cli_py.src.responses.events.event_types import release_event
 from github_cli_py.tests.events import generic
 
 

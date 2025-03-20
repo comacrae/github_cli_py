@@ -2,7 +2,7 @@ import pytest
 import json
 from typing import Mapping
 from github_cli_py.src.requester import github_requester
-from github_cli_py.src.responses.events import push_event
+from github_cli_py.src.responses.events.event_types import push_event
 
 @pytest.fixture
 def requester() -> github_requester.GithubRequester:

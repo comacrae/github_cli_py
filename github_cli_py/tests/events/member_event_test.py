@@ -1,6 +1,6 @@
 import pytest
 from typing import Mapping
-from github_cli_py.src.responses.events import member_event
+from github_cli_py.src.responses.events.event_types import member_event
 from github_cli_py.tests import utils
 
 @pytest.fixture

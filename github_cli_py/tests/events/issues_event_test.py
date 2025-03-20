@@ -1,7 +1,7 @@
 import pytest
 from typing import Mapping
 from github_cli_py.tests import utils
-from github_cli_py.src.responses.events import issues_event
+from github_cli_py.src.responses.events.event_types import issues_event
 
 @pytest.fixture
 def issues_event_response_json() -> Mapping:
