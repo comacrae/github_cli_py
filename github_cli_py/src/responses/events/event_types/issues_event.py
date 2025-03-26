@@ -1,6 +1,6 @@
 import pydantic
 from typing import Mapping
-from github_cli_py.src.responses.events import event_base
+from github_cli_py.src.responses.events.event_types import event_base
 
 class GithubIssuesEventPayload(event_base.GithubEventPayload):
   action:str

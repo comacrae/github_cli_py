@@ -1,6 +1,21 @@
 from typing import Mapping, Optional
-import github_cli_py.src.responses.events.event_types as e
-from github_cli_py.src.responses.events.event_types import event_base
+from github_cli_py.src.responses.events.event_types import ( 
+  event_base,
+  create_event, 
+  delete_event,
+  fork_event,
+  gollum_event,
+  issue_comment_event,
+  issues_event,
+  public_event,
+  pull_request_event,
+  pull_request_review_event,
+  pull_request_review_comment_event,
+  pull_request_review_thread_event,
+  push_event,
+  release_event,
+  watch_event
+)
 
 class GithubParseResponseException(Exception):
   def __init__(self, message:str) -> None:
@@ -8,20 +23,20 @@ class GithubParseResponseException(Exception):
 class GithubEventParser():
   def __init__(self) -> None:
     self._event_map: Mapping = {
-      "CreateEvent": e.create_event.GithubCreateEvent,
-      "DeleteEvent": e.delete_event.GithubDeleteEvent, 
-      "ForkEvent": e.fork_event.GithubForkEvent,
-      "GollumEvent": e.gollum_event.GithubGollumEvent,
-      "IssueCommentEvent": e.GithubIssueCommentEvent,
-      "IssuesEvent": e.GithubIssuesCommentEvent,
-      "PublicEvent": e.GithubPublicEvent,
-      "PullRequestEvent": e.GithubPullRequestEvent,
-      "PullRequestReviewEvent": e.GithubPullRequestReviewEvent,
-      "PullRequestReviewComment": e.GithubPullRequestReviewCommentEvent,
-      "PullRequestReviewThreadEvent": e.GithubPullRequestReviewThreadEvent,
-      "PushEvent": e.GithubPushEvent,
-      "ReleaseEvent": e.GithubReleaseEvent,
-      "WatchEvent": e.GithubWatchEvent
+      "CreateEvent": create_event.GithubCreateEvent,
+      "DeleteEvent": delete_event.GithubDeleteEvent, 
+      "ForkEvent": fork_event.GithubForkEvent,
+      "GollumEvent": gollum_event.GithubGollumEvent,
+      "IssueCommentEvent": issue_comment_event.GithubIssueCommentEvent,
+      "IssuesEvent": issues_event.GithubIssuesEvent,
+      "PublicEvent": public_event.GithubPublicEvent,
+      "PullRequestEvent": pull_request_event.GithubPullRequestEvent,
+      "PullRequestReviewEvent": pull_request_review_event.GithubPullRequestReviewEvent,
+      "PullRequestReviewComment": pull_request_review_comment_event.GithubPullRequestReviewCommentEvent,
+      "PullRequestReviewThreadEvent": pull_request_review_thread_event.GithubPullRequestReviewThreadEvent,
+      "PushEvent": push_event.GithubPushEvent,
+      "ReleaseEvent": release_event.GithubReleaseEvent,
+      "WatchEvent": watch_event.GithubWatchEvent
     }
     return
   

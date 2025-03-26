@@ -1,7 +1,6 @@
-from typing import Union, Mapping
 import pydantic
-
-from github_cli_py.src.responses.events import event_base
+from typing import Union, Mapping
+from github_cli_py.src.responses.events.event_types import event_base
 
 class GithubCommitAuthor(pydantic.BaseModel):
   email:str
