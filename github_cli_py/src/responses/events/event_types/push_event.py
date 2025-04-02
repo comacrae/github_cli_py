@@ -28,4 +28,8 @@ class PushEventPayload(event_base.GithubEventPayload):
 
 class GithubPushEvent(event_base.GithubEvent):
   payload: PushEventPayload
+  def to_cli_str(self)-> str:
+    repo:str = self.repo.name
+    size:int = self.payload.size
+    return f"Pushed {size} commits to {repo}"
   

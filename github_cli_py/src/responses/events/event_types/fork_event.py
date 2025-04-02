@@ -7,3 +7,6 @@ class ForkEventPayload(event_base.GithubEventPayload):
 class GithubForkEvent(event_base.GithubEvent):
   payload:ForkEventPayload
   #https://docs.github.com/en/rest/using-the-rest-api/github-event-types?apiVersion=2022-11-28#forkevent
+  def to_cli_str(self) -> str:
+    repo:str = self.repo.name
+    return  f"Forked {repo}"

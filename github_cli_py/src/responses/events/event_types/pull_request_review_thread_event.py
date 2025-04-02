@@ -8,3 +8,8 @@ class GithubPullRequestReviewThreadEventPayload(event_base.GithubEventPayload):
 
 class GithubPullRequestReviewThreadEvent(event_base.GithubEvent):
   payload: GithubPullRequestReviewThreadEventPayload
+  def to_cli_str(self) -> str:
+
+    repo:str = self.repo.name
+    action:str = self.payload.action
+    return f"Pull request review thread {action} in {repo}"

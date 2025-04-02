@@ -35,6 +35,11 @@ class GithubEvent(pydantic.BaseModel,abc.ABC):
   created_at: str
   payload:GithubEventPayload
 
+  @classmethod
+  @abc.abstractmethod
+  def to_cli_str(self) -> str:
+    pass
+
 
 
 

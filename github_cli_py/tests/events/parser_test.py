@@ -1,6 +1,6 @@
 import pytest
 from github_cli_py.tests import utils
-from github_cli_py.src.responses.events import parser
+from github_cli_py.src.responses.events import github_event_parser
 from github_cli_py.src.responses.events.event_types import create_event
 from github_cli_py.src.responses.events.event_types import delete_event
 from github_cli_py.src.responses.events.event_types import issue_comment_event
@@ -11,10 +11,10 @@ from github_cli_py.src.responses.events.event_types import fork_event
 
 @pytest.fixture
 def parser_fixture():
-  return parser.GithubEventParser()
+  return github_event_parser.GithubEventParser()
 
 
-def test_init_parser_success(parser_fixture: parser.GithubEventParser):
+def test_init_parser_success(parser_fixture: github_event_parser.GithubEventParser):
   return
 
 @pytest.mark.parametrize("event_type,event_class",
@@ -29,7 +29,7 @@ def test_init_parser_success(parser_fixture: parser.GithubEventParser):
 def test_parser_parse_reads_correct_type(
   event_type:str, 
   event_class: type[event_base.GithubEvent],
-  parser_fixture: parser.GithubEventParser) -> None:
+  parser_fixture: github_event_parser.GithubEventParser) -> None:
   filename:str =  event_type + "_event_response.json"
   assert type(filename) == str
   json:str = utils.load_json_resource(filename=filename)

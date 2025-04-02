@@ -11,3 +11,9 @@ class GithubIssuesEventPayload(event_base.GithubEventPayload):
 
 class GithubIssuesEvent(event_base.GithubEvent):
   payload: GithubIssuesEventPayload
+
+  def to_cli_str(self) -> str:
+
+    action:str = self.payload.action
+    repo:str = self.repo.name
+    return f"Issue {action} in {repo}"

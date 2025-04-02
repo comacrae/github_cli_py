@@ -10,3 +10,9 @@ class GithubCommitCommentPayload(event_base.GithubEventPayload):
 
 class GithubCommitCommentEvent(event_base.GithubEvent):
   payload: GithubCommitCommentPayload
+
+  def to_cli_str(self)-> str:
+
+    action:str = self.payload.action
+    repo:str = self.repo.name
+    return  f"Github commit comment {action} in {repo}"

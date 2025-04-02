@@ -3,6 +3,7 @@ import requests
 import os
 from typing import Final
 from github_cli_py.src.responses.events.event_types import event_base
+from github_cli_py.src.responses.events import github_event_parser
 
 class GithubRequester:
   """ Class for handling all interaction with the Github REST API. 
@@ -67,7 +68,8 @@ class GithubRequester:
     url : str = f"{self._BASE_URL}users/{username}/events/public"
     payload: dict[str,int] = {"page": page, "per_page": per_page}
     res : requests.Response = self._session.get(url=url, params=payload)
-    raise NotImplementedError
+    parser:github_event_parser.GithubEventParser = github_event_parser.GithubEventParser()
+    return [ parser.parse(event) for event in res.json()]
 
   
   def user_exists(self,username:str) -> bool:

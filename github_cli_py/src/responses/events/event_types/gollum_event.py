@@ -14,3 +14,7 @@ class GollumEventPayload(event_base.GithubEventPayload):
 
 class GithubGollumEvent(event_base.GithubEvent):
   payload: GollumEventPayload
+
+  def to_cli_str(self) -> str:
+    repo:str = self.repo.name
+    return  f"Gollum event in {repo}"

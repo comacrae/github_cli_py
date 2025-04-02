@@ -6,3 +6,7 @@ class GithubWatchEventPayload(event_base.GithubEventPayload):
 
 class GithubWatchEvent(event_base.GithubEvent):
   payload: GithubWatchEventPayload
+
+  def to_cli_str(self) -> str:
+    repo:str = self.repo.name
+    return f"Starred {repo}"

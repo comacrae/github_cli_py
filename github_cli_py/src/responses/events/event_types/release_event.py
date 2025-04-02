@@ -8,3 +8,8 @@ class GithubReleaseEventPayload(event_base.GithubEventPayload):
 
 class GithubReleaseEvent(event_base.GithubEvent):
   payload: event_base.GithubEventPayload
+
+  def to_cli_str(self)-> str:
+
+    repo:str = self.repo.name
+    return f"Published {repo}"

@@ -8,3 +8,7 @@ class GithubPullRequestReviewEventPayload(event_base.GithubEventPayload):
 
 class GithubPullRequestReviewEvent(event_base.GithubEvent):
   payload: GithubPullRequestReviewEventPayload
+  def to_cli_str(self) -> str:
+    repo:str = self.repo.name
+    action:str = self.payload.action
+    return f"Pull request review comment {action} in {repo}"

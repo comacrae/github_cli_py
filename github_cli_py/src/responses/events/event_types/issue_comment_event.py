@@ -10,3 +10,7 @@ class IssueCommentEventPayload(event_base.GithubEventPayload):
 
 class GithubIssueCommentEvent(event_base.GithubEvent):
   payload: IssueCommentEventPayload
+  def to_cli_str(self) -> str:
+    action:str = self.payload.action
+    repo:str = self.repo.name
+    return f"Issue comment {action} in {repo}"
