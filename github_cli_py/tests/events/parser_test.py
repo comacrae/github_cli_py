@@ -18,17 +18,22 @@ def test_init_parser_success(parser_fixture: parser.GithubEventParser):
   return
 
 @pytest.mark.parametrize("event_type,event_class",
-                          [("create", type[create_event.GithubCreateEvent]),
-                          ("delete", type[delete_event.GithubDeleteEvent]),
-                          ("issue_comment", type[issue_comment_event.GithubIssueCommentEvent]),
-                          ("issues",type[issues_event.GithubIssuesEvent]),
-                          ("pull_request", type[pull_request_event.GithubPullRequestEvent])])
+                          [
+                            ("create", create_event.GithubCreateEvent),
+                            ("delete", delete_event.GithubDeleteEvent),
+                            ("issue_comment", issue_comment_event.GithubIssueCommentEvent),
+                            ("issues",issues_event.GithubIssuesEvent),
+                            ("pull_request", pull_request_event.GithubPullRequestEvent)
+                          ]
+                        )
 def test_parser_parse_reads_correct_type(
   event_type:str, 
   event_class: type[event_base.GithubEvent],
   parser_fixture: parser.GithubEventParser) -> None:
-  json:str = utils.load_json_resource(f"{str(event_type)}_event_response.json")
-  assert type(parser_fixture.parse(json)) == event_class
+  filename:str =  event_type + "_event_response.json"
+  assert type(filename) == str
+  json:str = utils.load_json_resource(filename=filename)
+  assert isinstance(parser_fixture.parse(json), event_class) 
   return
   
 

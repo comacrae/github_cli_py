@@ -1,3 +1,4 @@
+import json
 from typing import Mapping, Optional
 from github_cli_py.src.responses.events.event_types import ( 
   event_base,
@@ -51,6 +52,8 @@ class GithubEventParser():
     except KeyError:
       raise GithubParseResponseException(f"Event type {event_type} is invalid.")
     else:
+      if type(response_json) == dict:
+        response_json = json.dumps(response_json)
       return event_class.model_validate_json(response_json)
 
     
