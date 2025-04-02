@@ -5,4 +5,10 @@ class GithubArgParser():
   def __init__(self):
     self.parser = argparse.ArgumentParser(prog='github-activity')
     self.parser.add_argument("username")
+
+  def parse(self):
+    args = self.parser.parse_args()
+    username = args.username
+    print(username)
+    return
   

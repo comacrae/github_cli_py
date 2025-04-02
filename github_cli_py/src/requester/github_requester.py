@@ -2,7 +2,7 @@ import dotenv
 import requests
 import os
 from typing import Final
-from github_cli_py.src.responses.events import event_base
+from github_cli_py.src.responses.events.event_types import event_base
 
 class GithubRequester:
   """ Class for handling all interaction with the Github REST API. 
@@ -67,7 +67,7 @@ class GithubRequester:
     url : str = f"{self._BASE_URL}users/{username}/events/public"
     payload: dict[str,int] = {"page": page, "per_page": per_page}
     res : requests.Response = self._session.get(url=url, params=payload)
-    res.
+    raise NotImplementedError
 
   
   def user_exists(self,username:str) -> bool:
