@@ -42,60 +42,90 @@ class EventStringConverter():
     return f"Github event base: type {event.type}"
 
   def create_event_to_str(self, event:create_event.GithubCreateEvent) -> str:
+    repo:str = event.repo.name
     ref_type:str = event.payload.ref_type
     master_branch:str = event.payload.master_branch
-    return  f"Github {ref_type} created in branch {master_branch}"
+    return  f"Github {ref_type} created in branch {master_branch} of {repo}"
   
   def commit_comment_event_to_str(self, 
                                   event:commit_comment_event.GithubCommitCommentEvent) -> str:  
-                                  raise NotImplementedError
+    action:str = event.payload.action
+    repo:str = event.repo.name
+    return  f"Github commit comment {action} in {repo}"
 
   def delete_event_to_str(self, 
                                   event:delete_event.GithubDeleteEvent) -> str:  
-                                  raise NotImplementedError
+    ref_type: str = event.payload.ref_type
+    repo:str = event.repo.name
+    return  f"Deleted {ref_type} in {repo}"
+
   def fork_event_to_str(self, 
                                   event:fork_event.GithubForkEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    return  f"Forked {repo}"
+                                  
 
   def gollum_event_to_str(self, 
                                   event:gollum_event.GithubGollumEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    return  f"Gollum event in {repo}"
 
   def issue_comment_event_to_str(self, 
                                   event:issue_comment_event.GithubIssueCommentEvent) -> str:  
-                                  raise NotImplementedError
+    action:str = event.payload.action
+    repo:str = event.repo.name
+    return f"Issue comment {action} in {repo}"
+
 
   def issues_event_to_str(self, 
                                   event:issues_event.GithubIssuesEvent) -> str:  
-                                  raise NotImplementedError
+    action:str = event.payload.action
+    repo:str = event.repo.name
+    return f"Issue {action} in {repo}"
 
   def public_event_to_str(self, 
                                   event:public_event.GithubPublicEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    return f"{repo} made public"
+
   def pull_request_event_to_str(self, 
                                   event:pull_request_event.GithubPullRequestEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    action:str = event.payload.action
+    return f"Pull request {action} in {repo}"
   
   def pull_request_review_event_to_str(self, 
                                   event:pull_request_review_event.GithubPullRequestReviewEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    action:str = event.payload.action
+    return f"Pull request review {action} in {repo}"
 
   def pull_request_review_comment_event_to_str(self, 
                                   event:pull_request_review_comment_event.GithubPullRequestReviewCommentEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    action:str = event.payload.action
+    return f"Pull request review comment {action} in {repo}"
   def pull_request_review_thread_event_to_str(self, 
                                   event:pull_request_review_thread_event.GithubPullRequestReviewThreadEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    action:str = event.payload.action
+    return f"Pull request review thread {action} in {repo}"
+
   def push_event_to_str(self, 
                                   event:push_event.GithubPushEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    size:int = event.payload.size
+    return f"Pushed {size} commits to {repo}"
+
   def release_event_to_str(self, 
                                   event:release_event.GithubReleaseEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    return f"Published {repo}"
 
   def watch_event_to_str(self, 
                                   event:watch_event.GithubWatchEvent) -> str:  
-                                  raise NotImplementedError
+    repo:str = event.repo.name
+    return f"Starred {repo}"
 
   def convert(self, event:event_base.GithubEvent) -> str:
     conversion_func = self.func_map[type(event)]
