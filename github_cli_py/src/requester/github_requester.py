@@ -20,6 +20,7 @@ class GithubRequester:
     self._GITHUB_API_KEY : Final[str] = self._get_api_key()
     self._session : requests.Session = self._build_session()
     self._BASE_URL : Final[str] = "https://api.github.com/"
+    self.parser:github_event_parser.GithubEventParser = github_event_parser.GithubEventParser()
     return
   
   def _build_session(self) -> requests.Session:
@@ -59,17 +60,47 @@ class GithubRequester:
     response: requests.Response = self._session.get(self._BASE_URL)
     return response.status_code == 200
   
-  def _get_public_user_events_paginated(self,username: str, 
-                                        page: int = 1, 
-                                        per_page: int = 30
-                                        ) -> list[event_base.GithubEvent]:
-    """  Gets user response.Assumes the username has already been validated"""
+  def _parse_public_user_events_response(self, res:requests.Response):
+    if res.status_code==200:
+        return [ self.parser.parse(event) for event in res.json()]
+    else:
+      return None
 
+  def _get_public_user_events_page(self, username:str,
+                                   page:int=1,
+                                   per_page: int = 10) ->requests.Response:
     url : str = f"{self._BASE_URL}users/{username}/events/public"
     payload: dict[str,int] = {"page": page, "per_page": per_page}
     res : requests.Response = self._session.get(url=url, params=payload)
-    parser:github_event_parser.GithubEventParser = github_event_parser.GithubEventParser()
-    return [ parser.parse(event) for event in res.json()]
+    return res
+  
+  def _get_public_user_events_paginated(self,username: str, 
+                                        page: int = 1, 
+                                        per_page: int = 10,
+                                        limit: int = 10
+                                        ) -> list[event_base.GithubEvent]:
+    """  Gets user response.Assumes the username has already been validated"""
+
+    results: list[event_base.GithubEvent] = []
+
+    res:requests.Response = self._get_public_user_events_page(username,
+                                                              page,
+                                                              per_page)
+    # limit = 11
+    # per_page = 10
+    #len(results) = 0
+    parsed = self._parse_public_user_events_response(res)
+
+    while len(results) < limit and parsed is not None:
+      results.append(parsed)
+      page+=1
+      res:requests.Response = self._get_public_user_events_page(username,
+                                                              page,
+                                                              per_page)
+      parsed = self._parse_public_user_events_response(res)
+    return parsed
+
+      
 
   
   def user_exists(self,username:str) -> bool:

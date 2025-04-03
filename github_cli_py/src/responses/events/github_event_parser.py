@@ -15,7 +15,10 @@ from github_cli_py.src.responses.events.event_types import (
   pull_request_review_thread_event,
   push_event,
   release_event,
-  watch_event
+  watch_event,
+  member_event,
+  sponsorship_event,
+  commit_comment_event
 )
 
 class GithubParseResponseException(Exception):
@@ -24,6 +27,9 @@ class GithubParseResponseException(Exception):
 class GithubEventParser():
   def __init__(self) -> None:
     self._event_map: Mapping = {
+      "MemberEvent": member_event.GithubMemberEvent,
+      "SponsorshipEvent": sponsorship_event.GithubSponsorshipEvent,
+      "CommitCommentEvent": commit_comment_event.GithubCommitCommentEvent,
       "CreateEvent": create_event.GithubCreateEvent,
       "DeleteEvent": delete_event.GithubDeleteEvent, 
       "ForkEvent": fork_event.GithubForkEvent,
@@ -33,7 +39,7 @@ class GithubEventParser():
       "PublicEvent": public_event.GithubPublicEvent,
       "PullRequestEvent": pull_request_event.GithubPullRequestEvent,
       "PullRequestReviewEvent": pull_request_review_event.GithubPullRequestReviewEvent,
-      "PullRequestReviewComment": pull_request_review_comment_event.GithubPullRequestReviewCommentEvent,
+      "PullRequestReviewCommentEvent": pull_request_review_comment_event.GithubPullRequestReviewCommentEvent,
       "PullRequestReviewThreadEvent": pull_request_review_thread_event.GithubPullRequestReviewThreadEvent,
       "PushEvent": push_event.GithubPushEvent,
       "ReleaseEvent": release_event.GithubReleaseEvent,

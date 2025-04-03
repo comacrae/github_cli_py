@@ -36,9 +36,8 @@ class GithubEvent(pydantic.BaseModel,abc.ABC):
   payload:GithubEventPayload
 
   @classmethod
-  @abc.abstractmethod
   def to_cli_str(self) -> str:
-    pass
+    return f"Unimplemented event type: {self.type}"
 
 
 
