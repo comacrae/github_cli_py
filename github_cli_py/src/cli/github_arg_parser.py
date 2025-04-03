@@ -51,13 +51,13 @@ class GithubArgParser():
     api_key:Optional[str] = self.load_api_key(keypath,inputkey)
 
     if api_key is None:
-      print("Error: You must provide an API key interactively using the -i option or path to the API key file with -k")
+      print("Error: You must provide an API key interactively using -i or the API key filepath using -k")
     else:
       self.requester:github_requester.GithubRequester = github_requester.GithubRequester(api_key)
       if self.requester.valid_session() == True:
         self.print_events(username,limit)
       else:
-        print(f"Error: API key {api_key} invalid")
+        print(f"Error: API key invalid")
 
 
   def print_events(self, username:str, limit:int):
@@ -65,7 +65,7 @@ class GithubArgParser():
         events = self.requester._get_public_user_events_paginated(username=username,
                                                                   limit=limit)
         if events is None:
-          print("An error ocurred")
+          print("An error ocurred while parsing events")
         else:
           for event in events:
             print("- " + event.to_cli_str())
