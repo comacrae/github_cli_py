@@ -13,7 +13,7 @@ class TestGithubRequester:
   def test_init_in_valid_state(self, 
                                requester: github_requester.GithubRequester
                                ) -> None:
-    assert requester._valid_session() == True
+    assert requester.valid_session() == True
     return
   
 #TODO: Add a test that checks for error handling when an API KEY isn't available
